@@ -48,4 +48,4 @@ def index():
 
     print(str(chapter))
     print(section)
-    return render_template('index.html', value='Hello World!')
+    return render_template('index.html', title = title, image = '/static/images/title_img.jpg')
