@@ -49,3 +49,17 @@ def index():
     print(str(chapter))
     print(section)
     return render_template('index.html', title = title, image = '/static/images/title_img.jpg', chapter = chapter, section=section)
+
+
+@app.route('/<page_number>')
+def section(page_number):
+    page = render_template('senseandsensibility.html')
+    links, sections = parse_htmlbook(page)
+    chapter = len(links)
+    title=sections[links[int(page_number)]]['title']
+    section = []
+    p = []
+    for i in range(chapter):
+        section.append(str(sections[links[i]]['title']))
+    para = sections[links[int(page_number)]]['plist']
+    return render_template('section.html', chapter = chapter, section = section, title = title, paragraphs = para)
