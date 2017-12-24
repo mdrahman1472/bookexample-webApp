@@ -4,8 +4,7 @@ from bs4 import BeautifulSoup
 from bookapp import app
 
 
-def parse_htmlbook():
-    page = render_template('senseandsensibility.html')
+def parse_htmlbook(page):
     links = get_chap_links(page)
     sections = {}
     for ind in range(len(links)):
@@ -41,8 +40,8 @@ def get_chap_links(page):
 
 @app.route('/')
 def index():
-    #page = render_template('/bookexample/bookapp/static/data/senseandsensibility.html')
-    links, sections = parse_htmlbook()
+    page = render_template('senseandsensibility.html')
+    links, sections = parse_htmlbook(page)
     chapter = len(links)
     title = "Sense and Sensibility by Jane Austen"
     section = []
