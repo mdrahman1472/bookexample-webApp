@@ -12,14 +12,12 @@ def parse_htmlbook(page):
         start = links[ind]
         if ind < len(links)-1:
             end = links[ind+1]
-            patt = ('<A NAME="' + start +
-            '"></A>(?P<sectionbody>.*)<A NAME="' +
-            end + '">' )
+            patt = ('<a name="{}"></a>(.*)' + '<a name="{}"></a>').format(start,end)
             match = re.search(patt,page,re.MULTILINE|re.DOTALL)
             if match == None:
                 raise Exception('patt: '+patt+'\n\n')
         else:
-            patt = ('<A NAME="' + start + '"></A>(?P<sectionbody>.*)<pre>')
+            patt = '<a name="{}"></a>(.*)<pre>'.format(start)
             match = re.search(patt,page,re.MULTILINE|re.DOTALL)
         if match:
             soup = BeautifulSoup(match.group("sectionbody"), 'html.parser')
