@@ -20,9 +20,9 @@ def parse_htmlbook(page):
             patt = '<a name="{}"></a>(.*)<pre>'.format(start)
             match = re.search(patt,page,re.MULTILINE|re.DOTALL)
         if match:
-            soup = BeautifulSoup(match.group("sectionbody"), 'html.parser')
+            soup = BeautifulSoup(match.group(1))
             plist = [p.contents[0] for p in soup.find_all('p')]
-            section['title']= (soup.find('h3').contents)[0]
+            section['title']= (soup.find('h2').contents)[0]
             section['plist']= plist
             sections[start] = section
     return links, sections
