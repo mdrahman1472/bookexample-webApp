@@ -30,7 +30,7 @@ def parse_htmlbook(page):
 
 
 def get_chap_links(page):
-    soup = BeautifulSoup(page)
+    soup = BeautifulSoup(page, 'html.parser')
     links = [str(link.get('href'))[1:]
              for link in soup.find_all('a') if link.get('href')]
     return links
